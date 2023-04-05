@@ -1,8 +1,6 @@
+# SPDX-License-Identifier: GPL-2.0-only
 #
-# Copyright (C) 2015-2016 OpenWrt.org
-#
-# This is free software, licensed under the GNU General Public License v3.
-#
+# Copyright (C) 2023 ImmortalWrt.org
 
 include $(TOPDIR)/rules.mk
 
@@ -14,8 +12,9 @@ PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).zip
 PKG_SOURCE_URL:=https://github.com/daeuniverse/dae/releases/download/v$(PKG_VERSION)/dae-full-src.zip?
 PKG_HASH:=226aa5a8538ebcc009391fbeb7cad56ec60207a64bb43c8cbd89a60412c79b1a
 
-PKG_LICENSE:=AGPL-3.0
+PKG_LICENSE:=AGPL-3.0-only
 PKG_LICENSE_FILE:=LICENSE
+PKG_MAINTAINER:=Tianling Shen <cnsztl@immortalwrt.org>
 
 PKG_BUILD_DEPENDS:=golang/host bpf-headers
 PKG_BUILD_PARALLEL:=1
