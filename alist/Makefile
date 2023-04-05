@@ -57,7 +57,6 @@ define Build/Prepare
 	$(call Build/Prepare/Default)
 	$(eval $(call Download,$(PKG_NAME)-web))
 	$(TAR) --strip-components=1 -C $(PKG_BUILD_DIR)/public/dist -xzf $(DL_DIR)/$(PKG_NAME)-web-$(PKG_WEB_VERSION).tar.gz
-	$(CP) ./files/assets/. $(PKG_BUILD_DIR)/public/dist/assets/
 endef
 
 define Package/$(PKG_NAME)/install
