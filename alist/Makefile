@@ -17,7 +17,6 @@ PKG_HASH:=48cc8630236fe13df265d42711837e31b52620f7afd51c33d3bb71ef0ce0a84c
 
 PKG_LICENSE:=GPL-3.0
 PKG_LICENSE_FILE:=LICENSE
-PKG_MAINTAINER:=sbwml <admin@cooluc.com>
 
 define Download/$(PKG_NAME)-web
   FILE:=$(PKG_NAME)-web-$(PKG_WEB_VERSION).tar.gz
@@ -38,7 +37,7 @@ GO_PKG_LDFLAGS_X:= \
 	$(PKG_ALIST).WebVersion=$(PKG_WEB_VERSION)
 
 include $(INCLUDE_DIR)/package.mk
-include $(TOPDIR)/feeds/packages/lang/golang/golang-package.mk
+include ../../lang/golang/golang-package.mk
 
 define Package/$(PKG_NAME)
   SECTION:=net
