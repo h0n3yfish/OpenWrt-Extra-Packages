@@ -31,13 +31,17 @@ GO_PKG_LDFLAGS_X:= \
 include $(INCLUDE_DIR)/package.mk
 include $(TOPDIR)/feeds/packages/lang/golang/golang-package.mk
 
-define Package/alist
+define Package/$(PKG_NAME)
   SECTION:=net
   CATEGORY:=Network
   SUBMENU:=Web Servers/Proxies
   TITLE:=A file list program that supports multiple storage
   URL:=https://alist-doc.nn.ci/
-  DEPENDS:=$(GO_ARCH_DEPENDS) +ca-bundle +fuse-utils
+  DEPENDS:=$(GO_ARCH_DEPENDS)
+endef
+
+define Package/$(PKG_NAME)/description
+  A file list program that supports multiple storage, powered by Gin and Solidjs.
 endef
 
 define Download/$(PKG_NAME)-web
