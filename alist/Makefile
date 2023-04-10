@@ -20,7 +20,7 @@ PKG_LICENSE_FILE:=LICENSE
 
 PKG_BUILD_DEPENDS:=golang/host
 PKG_BUILD_PARALLEL:=1
-PKG_BUILD_FLAGS:=no-mips16
+PKG_USE_MIPS16:=0
 
 PKG_ALIST:=github.com/alist-org/alist/v3/internal/conf
 GO_PKG:=github.com/alist-org/alist
@@ -56,9 +56,10 @@ define Build/Prepare
   $(call Build/Prepare/Default)
   $(eval $(call Download,$(PKG_NAME)-web))
   $(TAR) --strip-components=1 -C $(PKG_BUILD_DIR)/public/dist -xzf $(DL_DIR)/$(PKG_NAME)-web-$(PKG_WEB_VERSION).tar.gz
+  $(CP) ./files/assets/. $(PKG_BUILD_DIR)/public/dist/assets/
 endef
 
-define Package/alist/install
+define Package/$(PKG_NAME)/install
   $(call GoPackage/Package/Install/Bin,$(PKG_INSTALL_DIR))
   $(INSTALL_DIR) $(1)/usr/bin
   $(INSTALL_BIN) $(PKG_INSTALL_DIR)/usr/bin/alist $(1)/usr/bin
