@@ -1,9 +1,9 @@
 #
-# Copyright (C) 2015-2016 OpenWrt.org
+# Copyright (C) 2012-2021 OpenWrt.org
 #
-# This is free software, licensed under the GNU General Public License v3.
+# This is free software, licensed under the GNU General Public License v2.
+# See /LICENSE for more information.
 #
-
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=alist
@@ -20,9 +20,8 @@ PKG_LICENSE_FILE:=LICENSE
 
 PKG_BUILD_DEPENDS:=golang/host
 PKG_BUILD_PARALLEL:=1
-PKG_USE_MIPS16:=0
+PKG_BUILD_FLAGS:=no-mips16
 
-PKG_ALIST:=github.com/alist-org/alist/v3/internal/conf
 GO_PKG:=github.com/alist-org/alist/v3
 GO_PKG_LDFLAGS:=-w -s
 GO_PKG_LDFLAGS_X:= \
