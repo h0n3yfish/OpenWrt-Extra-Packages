@@ -10,8 +10,8 @@ PKG_NAME:=dae
 PKG_VERSION:=0.1.6
 PKG_RELEASE:=1
 
-PKG_SOURCE:=dae-full-src.zip
-PKG_SOURCE_URL:=https://github.com/daeuniverse/dae/releases/download/v$(PKG_VERSION)?
+PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).zip
+PKG_SOURCE_URL:=https://github.com/daeuniverse/dae/releases/download/v$(PKG_VERSION)/dae-full-src.zip?
 PKG_HASH:=fa1b06c73ddbb4b6aebc387c30b1f026d155fc273d4058d95ebc75188fde5037
 
 PKG_LICENSE:=GPL-3.0
@@ -32,7 +32,7 @@ include $(TOPDIR)/feeds/packages/lang/golang/golang-package.mk
 
 UNZIP_CMD:=unzip -q -d $(PKG_BUILD_DIR) $(DL_DIR)/$(PKG_SOURCE)
 
-define Package/dae
+define Package/$(PKG_NAME)
   SECTION:=net
   CATEGORY:=Network
   SUBMENU:=Web Servers/Proxies
@@ -43,7 +43,7 @@ define Package/dae
     +ca-bundle +kmod-sched-core +kmod-sched-bpf
 endef
 
-define Package/dae/description
+define Package/$(PKG_NAME)/description
   dae, means goose, is a lightweight and high-performance transparent
   proxy solution.
 
@@ -55,7 +55,7 @@ define Package/dae/description
   loss and additional resource consumption for direct traffic.
 endef
 
-define Package/dae/conffiles
+define Package/$(PKG_NAME)/conffiles
 /etc/dae/config.dae
 endef
 
@@ -80,7 +80,7 @@ define Build/Compile
 	)
 endef
 
-define Package/dae/install
+define Package/$(PKG_NAME)/install
 	$(call GoPackage/Package/Install/Bin,$(1))
 
 	$(INSTALL_DIR) $(1)/etc/dae/
@@ -93,5 +93,5 @@ define Package/dae/install
 	$(INSTALL_BIN) $(CURDIR)/files/dae.init $(1)/etc/init.d/dae
 endef
 
-$(eval $(call GoBinPackage,dae))
-$(eval $(call BuildPackage,dae))
+$(eval $(call GoBinPackage,$(PKG_NAME)))
+$(eval $(call BuildPackage,$(PKG_NAME)))
