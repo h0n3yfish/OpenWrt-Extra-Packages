@@ -1,29 +1,30 @@
 #
-#  SPDX-License-Identifier: AGPL-3.0-only
+# Copyright (C) 2012-2021 OpenWrt.org
 #
-
+# This is free software, licensed under the GNU General Public License v2.
+# See /LICENSE for more information.
+#
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=dae
-PKG_VERSION:=0.1.5
+PKG_VERSION:=0.1.6
 PKG_RELEASE:=1
 
-PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).zip
-PKG_SOURCE_URL:=https://github.com/daeuniverse/dae/releases/download/v$(PKG_VERSION)/dae-full-src.zip?
-PKG_HASH:=226aa5a8538ebcc009391fbeb7cad56ec60207a64bb43c8cbd89a60412c79b1a
+PKG_SOURCE:=dae-full-src.zip
+PKG_SOURCE_URL:=https://github.com/daeuniverse/dae/releases/download/v$(PKG_VERSION)?
+PKG_HASH:=fa1b06c73ddbb4b6aebc387c30b1f026d155fc273d4058d95ebc75188fde5037
 
-PKG_LICENSE:=AGPL-3.0-only
+PKG_LICENSE:=GPL-3.0
 PKG_LICENSE_FILE:=LICENSE
 
 PKG_BUILD_DEPENDS:=golang/host bpf-headers
 PKG_BUILD_PARALLEL:=1
-PKG_USE_MIPS16:=0
+PKG_BUILD_FLAGS:=no-mips16
 
 GO_PKG:=github.com/daeuniverse/dae
-GO_PKG_LDFLAGS:=-w -s
 GO_PKG_LDFLAGS_X:= \
 	$(GO_PKG)/cmd.Version=$(PKG_VERSION) \
-	$(GO_PKG)/common/consts.MaxMatchSetLen_=$(MAX_MATCH_SET_LEN)
+	$(GO_PKG)/common/consts.MaxMatchSetLen_=64
 
 include $(INCLUDE_DIR)/package.mk
 include $(INCLUDE_DIR)/bpf.mk
@@ -81,6 +82,9 @@ endef
 
 define Package/dae/install
 	$(call GoPackage/Package/Install/Bin,$(1))
+
+	$(INSTALL_DIR) $(1)/etc/dae/
+	$(INSTALL_CONF) $(PKG_BUILD_DIR)/example.dae $(1)/etc/dae/
 
 	$(INSTALL_DIR) $(1)/etc/config
 	$(INSTALL_CONF) $(CURDIR)/files/dae.config $(1)/etc/config/dae
