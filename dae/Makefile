@@ -10,8 +10,8 @@ PKG_NAME:=dae
 PKG_VERSION:=0.1.6
 PKG_RELEASE:=1
 
-PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).zip
-PKG_SOURCE_URL:=https://github.com/daeuniverse/dae/releases/download/v$(PKG_VERSION)/dae-full-src.zip?
+PKG_SOURCE:=dae-full-src.zip
+PKG_SOURCE_URL:=https://github.com/daeuniverse/dae/releases/download/v$(PKG_VERSION)/dae-full-src.zip
 PKG_HASH:=fa1b06c73ddbb4b6aebc387c30b1f026d155fc273d4058d95ebc75188fde5037
 
 PKG_LICENSE:=GPL-3.0
